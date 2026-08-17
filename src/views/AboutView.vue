@@ -226,7 +226,7 @@ function nextPhoto() {
 
 <style scoped>
 /* ===== ABOUT SECTION ===== */
-.about-section { background: #fff; }
+.about-section { background: #fff; padding-bottom: 20px; }
 
 .about-top-header {
   text-align: center;
@@ -293,7 +293,7 @@ function nextPhoto() {
 .about-cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* ===== FACTORY SECTION ===== */
-.factory-section { background: #f8fafc; padding: 50px 0; }
+.factory-section { background: #f8fafc; padding: 20px 0 50px; }
 .factory-grid-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
 .factory-card-thumb {
   border-radius: var(--radius-lg);
