@@ -5,28 +5,30 @@
   <section class="hero-section">
     <div class="hero-bg-img"></div>
     <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <div class="hero-badge">
-        <i class="fas fa-award"></i> 15+ Years of Experience | Precision | Quality | Timely Delivery
-      </div>
-      <h1 class="hero-title">
-        <span class="ht-brand">NECTRA SERVICES</span>
-      </h1>
-      <h2 class="hero-subtitle"> Precision Fabrication &amp; Engineering Solutions </h2>
-      <p class="hero-desc">
-        We provide high-quality fabrication, stainless steel, mild steel, laser cutting, welding,
-        and custom engineering solutions with precision and reliability in Ahmedabad, Gujarat.
-      </p>
-      <div class="hero-btns">
-        <RouterLink to="/contact" class="btn btn-primary btn-lg">
-          Get a Quote <i class="fas fa-arrow-right"></i>
-        </RouterLink>
-        <RouterLink to="/contact" class="btn btn-outline btn-lg">
-          <i class="fas fa-envelope"></i> Contact Us
-        </RouterLink>
-        <a :href="info.whatsappUrl" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">
-          <i class="fab fa-whatsapp"></i> WhatsApp Us
-        </a>
+    <div class="hero-wrapper">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-award"></i> 15+ Years of Experience | Precision | Quality | Timely Delivery
+        </div>
+        <h1 class="hero-title">
+          <span class="ht-brand">NECTRA SERVICES</span>
+        </h1>
+        <h2 class="hero-subtitle"> Precision Fabrication &amp; Engineering Solutions </h2>
+        <p class="hero-desc">
+          We provide high-quality fabrication, stainless steel, mild steel, laser cutting, welding,
+          and custom engineering solutions with precision and reliability in Ahmedabad, Gujarat.
+        </p>
+        <div class="hero-btns">
+          <RouterLink to="/contact" class="btn btn-primary btn-lg">
+            Get a Quote <i class="fas fa-arrow-right"></i>
+          </RouterLink>
+          <RouterLink to="/contact" class="btn btn-outline btn-lg">
+            <i class="fas fa-envelope"></i> Contact Us
+          </RouterLink>
+          <a :href="info.whatsappUrl" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">
+            <i class="fab fa-whatsapp"></i> WhatsApp Us
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -191,39 +193,46 @@ const info = businessInfo
 /* Hero */
 .hero-section {
   position: relative;
-  min-height: 92vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   color: #fff;
   overflow: hidden;
+  background: #0f172a;
 }
 .hero-bg-img {
   position: absolute;
   inset: 0;
   background-image: url('/images/hero-welder.png');
   background-size: cover;
-  background-position: center top;
+  background-position: right center;
   z-index: 0;
 }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(26,111,196,0.70) 100%);
+  background: linear-gradient(90deg, #0f172a 0%, rgba(15, 23, 42, 0.95) 35%, rgba(15, 23, 42, 0.45) 60%, rgba(15, 23, 42, 0.05) 100%);
   z-index: 1;
 }
-.hero-content {
+.hero-wrapper {
+  width: 100%;
+  padding-left: clamp(24px, 5vw, 70px);
+  padding-right: 24px;
   position: relative;
   z-index: 2;
-  max-width: 780px;
+}
+.hero-content {
+  max-width: 550px;
   padding-top: 80px;
   padding-bottom: 80px;
+  text-align: left;
 }
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.20);
   border-radius: 20px;
   padding: 7px 18px;
   font-size: 13px;
@@ -234,7 +243,7 @@ const info = businessInfo
 .hero-badge i { color: #fbbf24; }
 .hero-title {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(36px, 6vw, 64px);
+  font-size: clamp(36px, 5.5vw, 62px);
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 14px;
@@ -242,19 +251,19 @@ const info = businessInfo
 .ht-brand { color: #fff; }
 .hero-subtitle {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(18px, 3vw, 26px);
+  font-size: clamp(18px, 2.5vw, 24px);
   font-weight: 600;
-  color: #bfdbfe;
+  color: #38bdf8;
   margin-bottom: 16px;
 }
 .hero-desc {
   font-size: 16px;
   line-height: 1.75;
   color: rgba(255,255,255,0.85);
-  max-width: 620px;
+  max-width: 580px;
   margin-bottom: 36px;
 }
-.hero-btns { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-start; }
 
 /* Home Products */
 .home-products-section { background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 44px 0; }
@@ -318,15 +327,15 @@ const info = businessInfo
 .center-btn-row { text-align: center; margin-top: 28px; }
 
 /* Why Section */
-.why-section { background: var(--gradient-primary); }
+.why-section { background: var(--bg-dark); }
 .white-header .section-tag-light {
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: 20px;
   padding: 5px 16px;
   font-size: 11.5px;
   font-weight: 700;
-  color: #bfdbfe;
+  color: #38bdf8;
   letter-spacing: 2px;
   text-transform: uppercase;
   display: inline-block;
@@ -335,28 +344,28 @@ const info = businessInfo
 .section-title-white { color: #fff; font-family: 'Outfit', sans-serif; font-size: clamp(26px, 4vw, 36px); font-weight: 800; }
 .why-single-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .why-card {
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 28px 20px;
   text-align: center;
   transition: var(--transition);
 }
-.why-card:hover { background: rgba(255,255,255,0.18); transform: translateY(-4px); }
+.why-card:hover { background: #28364e; border-color: rgba(56, 189, 248, 0.4); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35); }
 .why-icon {
   width: 52px;
   height: 52px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(56, 189, 248, 0.12);
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  color: #bfdbfe;
+  color: #38bdf8;
   margin: 0 auto 14px;
 }
 .why-card h3 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-.why-card p { color: rgba(255,255,255,0.8); font-size: 13.5px; line-height: 1.6; }
+.why-card p { color: #94a3b8; font-size: 13.5px; line-height: 1.6; }
 
 /* Industries */
 .industries-section { background: #f8fafc; }

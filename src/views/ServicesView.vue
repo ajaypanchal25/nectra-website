@@ -168,8 +168,8 @@ const info = businessInfo
 .ind-section { background: #f8fafc; }
 .ind-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
 }
 .ind-card {
   display: flex;
@@ -200,7 +200,8 @@ const info = businessInfo
 .cta-btns { display: flex; flex-wrap: wrap; gap: 14px; }
 .btn-light-cta { color: var(--primary); background: #fff; font-weight: 700; }
 
-@media (max-width: 1100px) { .ind-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 1200px) { .ind-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 900px) { .ind-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 768px) {
   .svc-list-grid { grid-template-columns: 1fr; }
   .svc-item-card { flex-direction: column; align-items: flex-start; }
