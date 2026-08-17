@@ -1,17 +1,6 @@
 <template>
   <Navbar />
 
-  <!-- Page Header -->
-  <div class="page-header">
-    <span class="section-tag-header">PRODUCTS</span>
-    <h1 class="section-title-header">Our Products</h1>
-    <p class="section-sub-header">Precision-manufactured MS &amp; SS products for every industrial need.</p>
-    <div class="breadcrumb">
-      <RouterLink to="/">Home</RouterLink>
-      <i class="fas fa-chevron-right"></i>
-      <span>Products</span>
-    </div>
-  </div>
 
   <!-- Products Grid -->
   <section class="section products-section">

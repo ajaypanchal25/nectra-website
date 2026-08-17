@@ -1,17 +1,6 @@
 <template>
   <Navbar />
 
-  <!-- Page Header -->
-  <div class="page-header">
-    <span class="section-tag-header">SERVICES</span>
-    <h1 class="section-title-header">All Fabrication Services</h1>
-    <p class="section-sub-header">Complete MS &amp; SS fabrication services with precision and quality.</p>
-    <div class="breadcrumb">
-      <RouterLink to="/">Home</RouterLink>
-      <i class="fas fa-chevron-right"></i>
-      <span>Services</span>
-    </div>
-  </div>
 
   <!-- Services Grid -->
   <section class="section svc-section">

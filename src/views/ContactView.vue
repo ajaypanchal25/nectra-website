@@ -1,17 +1,6 @@
 <template>
   <Navbar />
 
-  <!-- Page Header -->
-  <div class="page-header">
-    <span class="section-tag-header">CONTACT US</span>
-    <h1 class="section-title-header">Get In Touch</h1>
-    <p class="section-sub-header">We'd love to hear from you. Reach out for a free consultation and quote.</p>
-    <div class="breadcrumb">
-      <RouterLink to="/">Home</RouterLink>
-      <i class="fas fa-chevron-right"></i>
-      <span>Contact Us</span>
-    </div>
-  </div>
 
   <!-- Contact Section -->
   <section class="section contact-section">

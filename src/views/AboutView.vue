@@ -1,24 +1,31 @@
 <template>
   <Navbar />
 
-  <!-- Page Header -->
-  <div class="page-header">
-    <span class="section-tag-header">ABOUT US</span>
-    <h1 class="section-title-header">About NECTRA SERVICES</h1>
-    <p class="section-sub-header">15+ Years of Excellence in MS &amp; SS Fabrication</p>
-    <div class="breadcrumb">
-      <RouterLink to="/">Home</RouterLink>
-      <i class="fas fa-chevron-right"></i>
-      <span>About Us</span>
-    </div>
-  </div>
-
-  <!-- About Detail Section -->
+  <!-- About Section: Image LEFT, Text RIGHT -->
   <section class="section about-section">
     <div class="container">
+
+      <!-- Centered ABOUT US tag -->
+      <div class="about-top-header">
+        <span class="section-tag">ABOUT US</span>
+      </div>
+
       <div class="about-detail-grid">
+        <!-- LEFT: Blue Card -->
+        <div class="about-img-col">
+          <div class="acb-card">
+            <div class="acb-logo">
+              <img src="/images/nectra-logo-mark.png" alt="NECTRA SERVICES" class="acb-logo-img" />
+            </div>
+            <div class="acb-name">NECTRA SERVICES</div>
+            <div class="acb-loc"><i class="fas fa-map-marker-alt"></i> Vatva, Ahmedabad, Gujarat</div>
+            <div class="acb-badge">MS &amp; SS Fabrication Specialist</div>
+            <div class="acb-motto">Precision | Quality | Timely Delivery</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Text -->
         <div class="about-content-box">
-          <span class="section-tag">WHO WE ARE</span>
           <h2 class="section-title" style="text-align:left">NECTRA SERVICES – Your Trusted Fabrication Partner</h2>
           <p class="ab-para">
             NECTRA SERVICES is a leading MS (Mild Steel) &amp; SS (Stainless Steel) Fabrication company based in Ahmedabad, Gujarat.
@@ -47,63 +54,14 @@
               <span>Ahmedabad, Gujarat</span>
             </div>
           </div>
-        </div>
-        <div class="about-contact-box">
-          <div class="acb-card">
-            <div class="acb-logo">
-              <img src="/images/nectra-logo-mark.png" alt="NECTRA SERVICES" class="acb-logo-img" />
-            </div>
-            <div class="acb-name">NECTRA SERVICES</div>
-            <div class="acb-loc"><i class="fas fa-map-marker-alt"></i> Vatva, Ahmedabad, Gujarat</div>
-            <div class="acb-badge">MS &amp; SS Fabrication Specialist</div>
-            <div class="acb-motto">Precision | Quality | Timely Delivery</div>
+          <div class="about-cta-row">
+            <RouterLink to="/contact" class="btn btn-primary">
+              Get a Free Quote <i class="fas fa-arrow-right"></i>
+            </RouterLink>
+            <a :href="info.whatsappUrl" target="_blank" class="btn btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> WhatsApp Us
+            </a>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mission & Vision -->
-  <section class="mv-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">OUR FOUNDATION</span>
-        <h2 class="section-title">Mission &amp; Vision</h2>
-      </div>
-      <div class="mv-grid">
-        <div class="mv-card">
-          <div class="mvc-icon mission"><i class="fas fa-bullseye"></i></div>
-          <h3>Our Mission</h3>
-          <p>
-            To deliver precision-engineered MS &amp; SS fabrication solutions with uncompromising quality,
-            timely delivery, and complete customer satisfaction. We aim to be the most trusted fabrication
-            partner in Gujarat and beyond.
-          </p>
-        </div>
-        <div class="mv-card">
-          <div class="mvc-icon vision"><i class="fas fa-eye"></i></div>
-          <h3>Our Vision</h3>
-          <p>
-            To become the leading fabrication and engineering solutions provider in India, known for innovation,
-            precision, and excellence. We envision expanding our capabilities to serve clients across diverse industries.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Choose Us -->
-  <section class="why-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">WHY CHOOSE US</span>
-        <h2 class="section-title">What Makes Us Different</h2>
-      </div>
-      <div class="why-grid">
-        <div v-for="item in whyUs" :key="item.title" class="why-card">
-          <div class="why-icon"><i :class="item.icon"></i></div>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.desc }}</p>
         </div>
       </div>
     </div>
@@ -141,6 +99,52 @@
         <div class="fh-item"><i class="fas fa-cogs"></i> CNC Bending</div>
         <div class="fh-item"><i class="fas fa-paint-brush"></i> Powder Coating</div>
         <div class="fh-item"><i class="fas fa-check-circle"></i> Quality Control</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Makes Us Different -->
+  <section class="why-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">WHY CHOOSE US</span>
+        <h2 class="section-title">What Makes Us Different</h2>
+      </div>
+      <div class="why-grid">
+        <div v-for="item in whyUs" :key="item.title" class="why-card">
+          <div class="why-icon"><i :class="item.icon"></i></div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="mv-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">OUR FOUNDATION</span>
+        <h2 class="section-title">Mission &amp; Vision</h2>
+      </div>
+      <div class="mv-grid">
+        <div class="mv-card">
+          <div class="mvc-icon mission"><i class="fas fa-bullseye"></i></div>
+          <h3>Our Mission</h3>
+          <p>
+            To deliver precision-engineered MS &amp; SS fabrication solutions with uncompromising quality,
+            timely delivery, and complete customer satisfaction. We aim to be the most trusted fabrication
+            partner in Gujarat and beyond.
+          </p>
+        </div>
+        <div class="mv-card">
+          <div class="mvc-icon vision"><i class="fas fa-eye"></i></div>
+          <h3>Our Vision</h3>
+          <p>
+            To become the leading fabrication and engineering solutions provider in India, known for innovation,
+            precision, and excellence. We envision expanding our capabilities to serve clients across diverse industries.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -190,6 +194,9 @@ import { ref } from 'vue'
 import Navbar from '../components/common/Navbar.vue'
 import Footer from '../components/common/Footer.vue'
 import { whyUs } from '../data/homeData.js'
+import businessInfo from '../data/businessInfo.js'
+
+const info = businessInfo
 
 const factoryPhotos = [
   { src: '/images/factory-exterior.jpg', caption: 'Factory Exterior – NECTRA SERVICES, Vatva, Ahmedabad' },
@@ -218,49 +225,59 @@ function nextPhoto() {
 </script>
 
 <style scoped>
-.page-header {
-  text-align: center;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 60px 0 44px;
-}
-.section-tag-header {
-  letter-spacing: 2px;
-  color: var(--primary);
-  background: rgba(26,111,196,0.08);
-  border-radius: 20px;
-  padding: 4px 14px;
-  font-size: 12px;
-  font-weight: 700;
-}
-.section-title-header {
-  color: #0f172a;
-  margin: 10px 0 6px;
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-}
-.section-sub-header { color: #64748b; font-size: 15px; }
-.breadcrumb {
-  color: #64748b;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 16px;
-  font-size: 13.5px;
-}
-.breadcrumb a { color: var(--primary); font-weight: 600; }
-
+/* ===== ABOUT SECTION ===== */
 .about-section { background: #fff; }
+
+.about-top-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
 .about-detail-grid {
   display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  gap: 48px;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 52px;
   align-items: center;
 }
-.about-content-box .section-tag { display: inline-block; margin-bottom: 14px; }
-.ab-para { color: #475569; font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
-.about-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+
+/* LEFT: Blue Card */
+.about-img-col { display: flex; align-items: center; justify-content: center; }
+.acb-card {
+  background: var(--gradient-primary);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 32px 52px;
+  text-align: center;
+  box-shadow: var(--shadow-primary);
+  width: 100%;
+  max-width: 450px;
+}
+.acb-logo { margin: 0 auto 14px; width: 64px; height: 64px; }
+.acb-logo-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.18);
+  padding: 8px;
+}
+.acb-name { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 20px; margin-bottom: 5px; letter-spacing: 0.5px; }
+.acb-loc { opacity: 0.85; margin: 0 0 14px; font-size: 12.5px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+.acb-badge {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.30);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+.acb-motto { opacity: 0.85; font-size: 12.5px; font-weight: 600; }
+
+/* RIGHT: Text */
+.ab-para { color: #475569; font-size: 13.5px; line-height: 1.75; margin-bottom: 12px; }
+.about-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; margin-bottom: 24px; }
 .about-badge-item {
   display: flex;
   align-items: center;
@@ -273,78 +290,10 @@ function nextPhoto() {
   font-weight: 600;
   color: var(--primary);
 }
-.acb-card {
-  background: var(--gradient-primary);
-  color: #fff;
-  border-radius: var(--radius-lg);
-  padding: 32px 24px;
-  text-align: center;
-  box-shadow: var(--shadow-primary);
-}
-.acb-logo { margin: 0 auto 14px; width: 70px; height: 70px; }
-.acb-logo-img { width: 70px; height: 70px; object-fit: contain; border-radius: 14px; background: rgba(255,255,255,0.15); padding: 8px; }
-.acb-name { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; margin-bottom: 6px; }
-.acb-loc { opacity: 0.9; margin: 4px 0 18px; font-size: 14px; }
-.acb-badge { background: rgba(255,255,255,0.20); border-radius: 20px; padding: 6px 16px; font-size: 13.5px; font-weight: 600; margin-bottom: 12px; display: inline-block; }
-.acb-motto { opacity: 0.9; font-size: 14px; font-weight: 600; }
+.about-cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
-.mv-section { background: #f8fafc; padding: 24px 0 36px; }
-.mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.mv-card {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: var(--radius);
-  padding: 32px 24px;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-}
-.mv-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-.mvc-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  margin-bottom: 18px;
-}
-.mvc-icon.mission { background: var(--gradient-primary); color: #fff; }
-.mvc-icon.vision { background: linear-gradient(135deg, #0284c7, #38bdf8); color: #fff; }
-.mv-card h3 { color: #0f172a; font-size: 18px; font-weight: 800; margin-bottom: 10px; }
-.mv-card p { color: #64748b; font-size: 14px; line-height: 1.7; }
-
-.why-section { background: #fff; padding: 24px 0; }
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
-}
-.why-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: var(--radius);
-  padding: 28px 20px;
-  text-align: center;
-  transition: var(--transition);
-}
-.why-card:hover { background: #fff; border-color: var(--primary-light); box-shadow: var(--shadow-sm); transform: translateY(-5px); }
-.why-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  background: var(--gradient-primary);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  margin: 0 auto 16px;
-}
-.why-card h3 { color: #0f172a; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-.why-card p { color: #64748b; font-size: 13.5px; line-height: 1.6; }
-
-.factory-section { background: #f8fafc; padding: 24px 0; }
+/* ===== FACTORY SECTION ===== */
+.factory-section { background: #f8fafc; padding: 50px 0; }
 .factory-grid-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
 .factory-card-thumb {
   border-radius: var(--radius-lg);
@@ -390,17 +339,8 @@ function nextPhoto() {
   gap: 8px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.30);
 }
-.thumb-info {
-  background: #fff;
-  padding: 16px 18px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #0f172a;
-}
-.thumb-info i { color: var(--primary); font-size: 16px; }
+.thumb-info { background: #fff; padding: 14px 18px; display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: #0f172a; }
+.thumb-info i { color: var(--primary); font-size: 14px; }
 .factory-highlights {
   display: flex;
   overflow: hidden;
@@ -409,26 +349,68 @@ function nextPhoto() {
   box-shadow: var(--shadow-sm);
   background: #fff;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 28px;
 }
-.fh-item {
-  flex: 1;
+.fh-item { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 12px; font-size: 13.5px; font-weight: 700; color: #0f172a; border-right: 1px solid #e2e8f0; transition: var(--transition); }
+.fh-item:last-child { border-right: none; }
+.fh-item i { color: var(--primary); font-size: 17px; }
+.fh-item:hover { color: var(--primary); background: rgba(26,111,196,0.05); }
+
+/* ===== WHAT MAKES US DIFFERENT ===== */
+.why-section { background: #fff; padding: 50px 0; }
+.why-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.why-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-align: center;
+  transition: var(--transition);
+}
+.why-card:hover { background: #fff; border-color: var(--primary-light); box-shadow: var(--shadow-sm); transform: translateY(-5px); }
+.why-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: var(--gradient-primary);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 18px 12px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #0f172a;
-  border-right: 1px solid #e2e8f0;
+  font-size: 20px;
+  margin: 0 auto 14px;
+}
+.why-card h3 { color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.why-card p { color: #64748b; font-size: 13px; line-height: 1.6; }
+
+/* ===== MISSION & VISION ===== */
+.mv-section { background: #f8fafc; padding: 50px 0; }
+.mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.mv-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  box-shadow: var(--shadow-sm);
   transition: var(--transition);
 }
-.fh-item:last-child { border-right: none; }
-.fh-item i { color: var(--primary); font-size: 18px; }
-.fh-item:hover { color: var(--primary); background: rgba(26,111,196,0.05); }
+.mv-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+.mvc-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+.mvc-icon.mission { background: var(--gradient-primary); color: #fff; }
+.mvc-icon.vision { background: linear-gradient(135deg, #0284c7, #38bdf8); color: #fff; }
+.mv-card h3 { color: #0f172a; font-size: 20px; font-weight: 800; margin-bottom: 12px; font-family: 'Outfit', sans-serif; }
+.mv-card p { color: #64748b; font-size: 14.5px; line-height: 1.8; }
 
-/* Lightbox */
+/* ===== LIGHTBOX ===== */
 .lightbox-backdrop {
   position: fixed;
   inset: 0;
@@ -502,7 +484,7 @@ function nextPhoto() {
 .lightbox-fade-enter-active, .lightbox-fade-leave-active { transition: opacity 0.3s; }
 .lightbox-fade-enter-from, .lightbox-fade-leave-to { opacity: 0; }
 
-/* CTA */
+/* ===== CTA ===== */
 .cta-banner { background: var(--gradient-primary); color: #fff; padding: 50px 0; }
 .cta-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
 .cta-inner h2 { margin-bottom: 6px; font-family: 'Outfit', sans-serif; font-size: clamp(22px,3.5vw,30px); font-weight: 800; }
@@ -510,17 +492,28 @@ function nextPhoto() {
 .cta-btns { display: flex; flex-wrap: wrap; gap: 14px; }
 .btn-light-cta { color: var(--primary); background: #fff; font-weight: 700; }
 
-@media (max-width: 1100px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1100px) {
+  .why-grid { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 900px) {
-  .about-detail-grid, .mv-grid { grid-template-columns: 1fr; }
-  .cta-inner { text-align: center; flex-direction: column; justify-content: center; }
-  .cta-btns { justify-content: center; }
+  .about-detail-grid { grid-template-columns: 1fr; }
+  .about-img-col { order: 1; }
+  .about-content-box { order: 2; }
+  .about-main-img { height: 300px; }
+  .mv-grid { grid-template-columns: 1fr; }
   .factory-grid-row { grid-template-columns: 1fr; }
   .lightbox-nav.prev { left: 10px; }
   .lightbox-nav.next { right: 10px; }
   .factory-highlights { flex-wrap: wrap; }
   .fh-item { flex: 50%; border-bottom: 1px solid #e2e8f0; }
+  .cta-inner { text-align: center; flex-direction: column; justify-content: center; }
+  .cta-btns { justify-content: center; }
 }
-@media (max-width: 768px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .why-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .why-grid { grid-template-columns: 1fr; }
+}
 </style>
