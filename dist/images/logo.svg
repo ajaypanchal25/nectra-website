@@ -1,0 +1,37 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Royal Blue Gear Teeth & Circle -->
+  <g fill="#0056ba">
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(0 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(18 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(36 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(54 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(72 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(90 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(108 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(126 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(144 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(162 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(180 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(198 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(216 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(234 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(252 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(270 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(288 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(306 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(324 50 50)"/>
+    <rect x="46" y="2" width="8" height="12" rx="2" transform="rotate(342 50 50)"/>
+    <circle cx="50" cy="50" r="41"/>
+  </g>
+  <!-- Thin White Inner Ring -->
+  <circle cx="50" cy="50" r="36.5" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+  <!-- Interlocking White NS Monogram -->
+  <g fill="none" stroke="#ffffff" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- N Left Stem -->
+    <path d="M 26,78 V 38"/>
+    <!-- N Diagonal -->
+    <path d="M 26,38 L 47,65"/>
+    <!-- N Right Stem into S Top and S Bottom Loops -->
+    <path d="M 47,65 V 42 C 47,26 63,22 72,32 C 80,41 71,52 59,53 C 48,54 43,62 44,70 C 45,77 58,78 72,71"/>
+  </g>
+</svg>
