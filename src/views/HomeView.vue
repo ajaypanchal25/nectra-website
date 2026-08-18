@@ -222,7 +222,7 @@ const info = businessInfo
   z-index: 2;
 }
 .hero-content {
-  max-width: 550px;
+  max-width: 720px;
   padding-top: 80px;
   padding-bottom: 80px;
   text-align: left;
@@ -243,12 +243,16 @@ const info = businessInfo
 .hero-badge i { color: #fbbf24; }
 .hero-title {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(36px, 5.5vw, 62px);
+  font-size: clamp(24px, 5.2vw, 58px);
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 14px;
 }
-.ht-brand { color: #fff; }
+.ht-brand {
+  color: #fff;
+  white-space: nowrap;
+  display: inline-block;
+}
 .hero-subtitle {
   font-family: 'Outfit', sans-serif;
   font-size: clamp(18px, 2.5vw, 24px);

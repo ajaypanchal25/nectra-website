@@ -11,7 +11,7 @@
         </a>
       </div>
       <div class="top-bar-right">
-        <span>
+        <span class="top-bar-address" :title="info.address">
           <i class="fas fa-map-marker-alt"></i> {{ info.address }}
         </span>
         <span class="gst-badge">
@@ -97,40 +97,56 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 <style scoped>
 /* Top Bar */
 .top-bar {
-  background: var(--bg-dark);
-  color: #94a3b8;
-  font-size: 12.5px;
-  padding: 7px 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 12px;
+  padding: 6px 0;
 }
 .top-bar-inner {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 5px;
 }
-.top-bar-left, .top-bar-right {
+.top-bar-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   flex-wrap: wrap;
 }
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: #64748b;
+}
+.top-bar-address {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 .top-bar a {
-  color: #94a3b8;
+  color: #1e293b;
+  font-weight: 600;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 6px;
   transition: color 0.2s;
 }
-.top-bar a:hover { color: #fff; }
-.top-bar i { color: var(--primary-light); font-size: 11px; }
+.top-bar a:hover { color: var(--primary); }
+.top-bar i { color: var(--primary); font-size: 11.5px; }
 .gst-badge {
-  background: #ffffff10;
-  border: 1px solid #ffffff18;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
   border-radius: 12px;
   padding: 2px 10px;
-  font-size: 11.5px;
+  font-size: 11px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -269,6 +285,6 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   .nav-links.open { display: flex; }
   .nav-links a { border-radius: 8px; }
   .navbar { position: relative; }
-  .top-bar-right { display: none; }
+  .top-bar-right { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
 </style>
