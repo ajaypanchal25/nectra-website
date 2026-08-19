@@ -357,70 +357,91 @@ const navLinks = [
 }
 .review-modal-card {
   background: #fff;
-  border-radius: var(--radius-lg);
-  max-width: 620px;
+  border-radius: 16px;
+  max-width: 580px;
   width: 100%;
-  padding: 36px 32px;
+  padding: 28px 26px;
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.40);
   border: 1px solid #cbd5e1;
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
+
+/* Custom internal scrollbar */
+.review-modal-card::-webkit-scrollbar {
+  width: 6px;
+}
+.review-modal-card::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+.review-modal-card::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.review-modal-card::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
 .review-modal-close {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 36px;
-  height: 36px;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: #f1f5f9;
   border: 1px solid #cbd5e1;
   color: #475569;
-  font-size: 16px;
+  font-size: 15px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  z-index: 10;
 }
 .review-modal-close:hover { background: #ef4444; color: #fff; border-color: #ef4444; }
 
-.rm-header { text-align: center; margin-bottom: 22px; }
+.rm-header { text-align: center; margin-bottom: 16px; }
 .rm-icon {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   background: rgba(26, 111, 196, 0.10);
   color: var(--primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
-  margin: 0 auto 10px;
+  font-size: 20px;
+  margin: 0 auto 8px;
 }
-.rm-header h3 { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
-.rm-header p { color: #64748b; font-size: 14px; margin: 0; }
+.rm-header h3 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 2px; }
+.rm-header p { color: #64748b; font-size: 13.5px; margin: 0; }
 
-.arb-form { display: flex; flex-direction: column; gap: 18px; text-align: left; }
-.arb-rating-select { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; background: #f8fafc; padding: 12px 18px; border-radius: 10px; border: 1px solid #cbd5e1; }
-.arb-rating-select label { font-size: 14px; font-weight: 700; color: #334155; }
+.arb-form { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+.arb-rating-select { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: #f8fafc; padding: 10px 14px; border-radius: 10px; border: 1px solid #cbd5e1; }
+.arb-rating-select label { font-size: 13.5px; font-weight: 700; color: #334155; }
 .star-rating-input { display: flex; align-items: center; gap: 6px; }
-.star-rating-input i { font-size: 24px; color: #cbd5e1; cursor: pointer; transition: transform 0.15s, color 0.15s; }
+.star-rating-input i { font-size: 22px; color: #cbd5e1; cursor: pointer; transition: transform 0.15s, color 0.15s; }
 .star-rating-input i.filled { color: #f59e0b; }
 .star-rating-input i:hover { transform: scale(1.2); }
-.rating-val-text { font-size: 13.5px; font-weight: 700; color: #475569; margin-left: 8px; }
+.rating-val-text { font-size: 13px; font-weight: 700; color: #475569; margin-left: 6px; }
 
-.arb-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group label { font-size: 13.5px; font-weight: 700; color: #334155; }
+.arb-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 13px; font-weight: 700; color: #334155; }
 .form-group input {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
   border: 1px solid #cbd5e1;
   font-family: inherit;
-  font-size: 14.5px;
+  font-size: 14px;
   background: #fff;
   color: #0f172a;
   outline: none;
@@ -429,20 +450,19 @@ const navLinks = [
 }
 .form-group textarea {
   width: 100%;
-  padding: 14px 16px;
-  border-radius: 10px;
+  padding: 11px 14px;
+  border-radius: 8px;
   border: 1px solid #cbd5e1;
   font-family: inherit;
-  font-size: 14.5px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.4;
   background: #fff;
   color: #0f172a;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
-  min-height: 110px;
+  min-height: 85px;
   resize: vertical;
-  field-sizing: content;
 }
 .form-group input:focus, .form-group textarea:focus {
   border-color: var(--primary);
