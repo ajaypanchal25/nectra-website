@@ -149,6 +149,8 @@
     </div>
   </section>
 
+
+
   <!-- Lightbox -->
   <Teleport to="body">
     <Transition name="lightbox-fade">
@@ -210,6 +212,8 @@ import { whyUs } from '../data/homeData.js'
 import businessInfo from '../data/businessInfo.js'
 
 const info = businessInfo
+
+
 
 const factoryPhotos = [
   { src: '/images/factory-exterior.jpg', caption: 'Factory Exterior – NECTRA SERVICES, Vatva, Ahmedabad' },
@@ -553,31 +557,93 @@ function handleTouchEnd(e) {
 .cta-btns { display: flex; flex-wrap: wrap; gap: 14px; }
 .btn-light-cta { color: var(--primary); background: #fff; font-weight: 700; }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1100px) {
-  .why-grid { grid-template-columns: repeat(3, 1fr); }
+/* ===== REVIEWS / TESTIMONIALS ===== */
+.reviews-section { background: #fff; padding: 60px 0; }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
-@media (max-width: 900px) {
-  .about-detail-grid { grid-template-columns: 1fr; }
-  .about-img-col { order: 1; }
-  .about-content-box { order: 2; }
-  .about-main-img { height: 300px; }
-  .mv-grid { grid-template-columns: 1fr; }
-  .factory-grid-row { grid-template-columns: 1fr; }
-  .factory-highlights { flex-wrap: wrap; }
-  .fh-item { flex: 50%; border-bottom: 1px solid #e2e8f0; }
-  .cta-inner { text-align: center; flex-direction: column; justify-content: center; }
-  .cta-btns { justify-content: center; }
+.review-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
-@media (max-width: 768px) {
-  .why-grid { grid-template-columns: repeat(2, 1fr); }
-  .lightbox-backdrop { padding: 10px; }
-  .lightbox-close { top: 12px; right: 12px; width: 38px; height: 38px; font-size: 17px; }
-  .lightbox-nav { width: 42px; height: 42px; font-size: 16px; background: rgba(15, 23, 42, 0.82); }
-  .lightbox-nav.prev { left: 10px; }
-  .lightbox-nav.next { right: 10px; }
+.review-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary);
+  box-shadow: 0 12px 30px rgba(26,111,196,0.12);
+  background: #fff;
 }
-@media (max-width: 480px) {
-  .why-grid { grid-template-columns: 1fr; }
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
+.review-quote-icon {
+  font-size: 24px;
+  color: rgba(26, 111, 196, 0.25);
+}
+.review-stars {
+  color: #f59e0b;
+  font-size: 15px;
+  display: flex;
+  gap: 3px;
+}
+.review-comment {
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.7;
+  font-style: italic;
+  flex: 1;
+  margin-bottom: 20px;
+}
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+.author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(26, 111, 196, 0.10);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.author-details {
+  display: flex;
+  flex-direction: column;
+}
+.author-name {
+  color: #0f172a;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+.author-role {
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.author-company {
+  color: #64748b;
+  font-size: 11.5px;
+}
+
+
 </style>

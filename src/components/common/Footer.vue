@@ -86,10 +86,74 @@
             <a :href="info.gmailUrl" target="_blank" rel="noopener noreferrer" title="Email">
               <i class="fas fa-envelope"></i>
             </a>
+            <button class="footer-feedback-btn" @click="openReviewModal" title="Send Your Feedback">
+              <i class="fas fa-star"></i> Send Your Feedback
+            </button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Review / Feedback Popup Modal -->
+    <Teleport to="body">
+      <Transition name="modal-fade">
+        <div v-if="reviewModalOpen" class="review-modal-backdrop" @click.self="closeReviewModal">
+          <div class="review-modal-card">
+            <button class="review-modal-close" @click="closeReviewModal" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
+
+            <div class="rm-header">
+              <div class="rm-icon"><i class="fas fa-star"></i></div>
+              <h3>Send Your Feedback / Review</h3>
+              <p>Share your experience with NECTRA SERVICES directly via WhatsApp or Email</p>
+            </div>
+
+            <form @submit.prevent="submitFeedbackWhatsApp" class="arb-form">
+              <div class="arb-rating-select">
+                <label>Your Rating:</label>
+                <div class="star-rating-input">
+                  <i
+                    v-for="star in 5"
+                    :key="star"
+                    :class="[star <= (hoverRating || newReview.rating) ? 'fas fa-star filled' : 'far fa-star']"
+                    @click="newReview.rating = star"
+                    @mouseenter="hoverRating = star"
+                    @mouseleave="hoverRating = 0"
+                  ></i>
+                  <span class="rating-val-text">{{ newReview.rating }} / 5 Stars</span>
+                </div>
+              </div>
+
+              <div class="arb-fields-grid">
+                <div class="form-group">
+                  <label>Your Name *</label>
+                  <input v-model="newReview.name" type="text" placeholder="your name" required />
+                </div>
+                <div class="form-group">
+                  <label>Company / City</label>
+                  <input v-model="newReview.company" type="text" placeholder="your company / city" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Your Feedback / Review Message *</label>
+                <textarea v-model="newReview.comment" rows="3" placeholder="Write your experience or feedback here..." required></textarea>
+              </div>
+
+              <div class="arb-btn-row">
+                <button type="submit" class="btn btn-whatsapp-submit">
+                  <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                </button>
+                <button type="button" @click="submitFeedbackEmail" class="btn btn-email-submit">
+                  <i class="fab fa-google"></i> Send via Gmail
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
         <p>&copy; {{ year }} NECTRA SERVICES. All rights reserved.</p>
@@ -100,12 +164,64 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import businessInfo from '../../data/businessInfo.js'
 import services from '../../data/services.js'
 
 const info = businessInfo
 const year = computed(() => new Date().getFullYear())
+
+const reviewModalOpen = ref(false)
+function openReviewModal() {
+  reviewModalOpen.value = true
+  document.body.style.overflow = 'hidden'
+}
+function closeReviewModal() {
+  reviewModalOpen.value = false
+  document.body.style.overflow = ''
+}
+
+const hoverRating = ref(0)
+const newReview = ref({
+  rating: 5,
+  name: '',
+  company: '',
+  comment: ''
+})
+
+function submitFeedbackWhatsApp() {
+  if (!newReview.value.name || !newReview.value.comment) return
+
+  const starsText = '⭐'.repeat(newReview.value.rating)
+  const message = `*New Customer Review for NECTRA SERVICES*\n\n` +
+    `*Rating:* ${starsText} (${newReview.value.rating}/5 Stars)\n` +
+    `*Name:* ${newReview.value.name}\n` +
+    (newReview.value.company ? `*Company/Location:* ${newReview.value.company}\n` : '') +
+    `*Feedback:* ${newReview.value.comment}`
+
+  const encodedMsg = encodeURIComponent(message)
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=919979170404&text=${encodedMsg}`
+  closeReviewModal()
+  window.open(whatsappUrl, '_blank')
+}
+
+function submitFeedbackEmail() {
+  if (!newReview.value.name || !newReview.value.comment) return
+
+  const starsText = '⭐'.repeat(newReview.value.rating)
+  const subject = encodeURIComponent(`Customer Review from ${newReview.value.name}`)
+  const body = encodeURIComponent(
+    `Customer Review for NECTRA SERVICES\n\n` +
+    `Rating: ${starsText} (${newReview.value.rating}/5 Stars)\n` +
+    `Name: ${newReview.value.name}\n` +
+    `Company/Location: ${newReview.value.company || 'N/A'}\n` +
+    `Feedback:\n${newReview.value.comment}`
+  )
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=Info@nectraservices.com&su=${subject}&body=${body}`
+  closeReviewModal()
+  window.open(gmailUrl, '_blank')
+}
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -121,8 +237,8 @@ const navLinks = [
 .footer-top { padding: 60px 0 40px; }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-  gap: 40px;
+  grid-template-columns: 1.2fr 0.9fr 0.9fr 1.6fr;
+  gap: 28px;
 }
 .footer-logo {
   display: flex;
@@ -187,7 +303,7 @@ const navLinks = [
 .fc-row i { color: var(--primary-light); font-size: 13px; margin-top: 2px; flex-shrink: 0; }
 .fc-row a { color: #94a3b8; text-decoration: none; transition: color 0.2s; }
 .fc-row a:hover { color: #fff; }
-.footer-social { display: flex; gap: 10px; }
+.footer-social { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; }
 .footer-social a {
   width: 36px;
   height: 36px;
@@ -201,8 +317,175 @@ const navLinks = [
   font-size: 15px;
   text-decoration: none;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 .footer-social a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.footer-feedback-btn {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: #ffffff10;
+  border: 1px solid #ffffff18;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.footer-feedback-btn i { color: #f59e0b; font-size: 13px; }
+.footer-feedback-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.footer-feedback-btn:hover i { color: #fff; }
+
+/* Review Modal */
+.review-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.review-modal-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  max-width: 620px;
+  width: 100%;
+  padding: 36px 32px;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.40);
+  border: 1px solid #cbd5e1;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.review-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.review-modal-close:hover { background: #ef4444; color: #fff; border-color: #ef4444; }
+
+.rm-header { text-align: center; margin-bottom: 22px; }
+.rm-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(26, 111, 196, 0.10);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 auto 10px;
+}
+.rm-header h3 { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+.rm-header p { color: #64748b; font-size: 14px; margin: 0; }
+
+.arb-form { display: flex; flex-direction: column; gap: 18px; text-align: left; }
+.arb-rating-select { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; background: #f8fafc; padding: 12px 18px; border-radius: 10px; border: 1px solid #cbd5e1; }
+.arb-rating-select label { font-size: 14px; font-weight: 700; color: #334155; }
+.star-rating-input { display: flex; align-items: center; gap: 6px; }
+.star-rating-input i { font-size: 24px; color: #cbd5e1; cursor: pointer; transition: transform 0.15s, color 0.15s; }
+.star-rating-input i.filled { color: #f59e0b; }
+.star-rating-input i:hover { transform: scale(1.2); }
+.rating-val-text { font-size: 13.5px; font-weight: 700; color: #475569; margin-left: 8px; }
+
+.arb-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 13.5px; font-weight: 700; color: #334155; }
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-family: inherit;
+  font-size: 14.5px;
+  background: #fff;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-family: inherit;
+  font-size: 14.5px;
+  line-height: 1.5;
+  background: #fff;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  min-height: 110px;
+  resize: vertical;
+  field-sizing: content;
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26, 111, 196, 0.15);
+}
+
+.arb-btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+.btn-whatsapp-submit {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  cursor: pointer;
+  padding: 11px 20px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-whatsapp-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5); }
+
+.btn-email-submit {
+  background: var(--gradient-primary);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  box-shadow: var(--shadow-primary);
+  cursor: pointer;
+  padding: 11px 20px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-email-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26, 111, 196, 0.5); }
+
+.modal-fade-enter-active, .modal-fade-leave-active { transition: opacity 0.3s; }
+.modal-fade-enter-from, .modal-fade-leave-to { opacity: 0; }
 .footer-bottom {
   border-top: 1px solid #ffffff10;
   padding: 18px 0;
