@@ -144,9 +144,9 @@
       <div class="stats-header">OUR HIGHLIGHTS</div>
       <div class="stats-grid">
         <div
-          v-for="(stat, idx) in stats"
+          v-for="stat in stats"
           :key="stat.label"
-          :class="['stat-item', { 'has-divider': idx < stats.length - 1 }]"
+          class="stat-item"
         >
           <div class="stat-icon"><i :class="stat.icon"></i></div>
           <div class="stat-text-box">
@@ -391,7 +391,7 @@ const info = businessInfo
 .industry-card span { color: #334155; font-size: 12.5px; font-weight: 600; }
 
 /* Stats Banner */
-.stats-banner { background: var(--bg-dark); padding: 40px 0; }
+.stats-banner { background: var(--bg-dark); padding: 40px 0; overflow: hidden; }
 .stats-header { color: #94a3b8; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 28px; }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
 .stat-item {
@@ -400,8 +400,9 @@ const info = businessInfo
   justify-content: center;
   gap: 16px;
   padding: 20px 24px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
-.stat-item.has-divider { border-right: 1px solid rgba(255,255,255,0.18); }
+.stat-item:last-child { border-right: none; }
 .stat-icon { color: #38bdf8; flex-shrink: 0; font-size: 40px; }
 .stat-text-box { display: flex; flex-direction: column; }
 .stat-number { color: #fff; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800; line-height: 1.1; }
@@ -445,10 +446,24 @@ const info = businessInfo
   .home-products-grid, .services-single-row, .why-single-row { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .industries-single-row { grid-template-columns: repeat(4, 1fr); gap: 12px; }
 }
+@media (max-width: 992px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .stat-item {
+    border-right: none;
+    border-bottom: none;
+    padding: 16px 12px;
+    gap: 12px;
+    justify-content: center;
+  }
+  .stat-item:nth-child(odd) { border-right: 1px solid rgba(255, 255, 255, 0.15); }
+  .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+  .stat-icon { font-size: 32px; }
+  .stat-number { font-size: 26px; }
+  .stat-label { font-size: 12px; }
+}
 @media (max-width: 768px) {
   .home-products-grid { grid-template-columns: 1fr; }
   .services-single-row, .why-single-row, .industries-single-row { grid-template-columns: repeat(2, 1fr); }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .cta-inner { text-align: center; flex-direction: column; justify-content: center; }
   .cta-text { text-align: center; flex-direction: column; }
   .hero-btns { flex-direction: column; align-items: flex-start; }
@@ -456,5 +471,21 @@ const info = businessInfo
 @media (max-width: 480px) {
   .home-products-grid, .services-single-row, .why-single-row { grid-template-columns: 1fr; }
   .industries-single-row { grid-template-columns: repeat(2, 1fr); }
+  .stat-item {
+    padding: 14px 8px;
+    gap: 8px;
+  }
+  .stat-icon { font-size: 26px; }
+  .stat-number { font-size: 22px; }
+  .stat-label { font-size: 11px; }
+}
+@media (max-width: 360px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 14px 12px;
+  }
+  .stat-item:last-child { border-bottom: none !important; }
 }
 </style>

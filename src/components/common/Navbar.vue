@@ -1,25 +1,4 @@
 <template>
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <div class="container top-bar-inner">
-      <div class="top-bar-left">
-        <a :href="info.phoneUrl">
-          <i class="fas fa-phone-alt"></i> {{ info.phone }}
-        </a>
-        <a :href="info.gmailUrl" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-envelope"></i> {{ info.email }}
-        </a>
-      </div>
-      <div class="top-bar-right">
-        <span class="top-bar-address" :title="info.address">
-          <i class="fas fa-map-marker-alt"></i> {{ info.address }}
-        </span>
-        <span class="gst-badge">
-          <i class="fas fa-certificate"></i> GST: {{ info.gst }}
-        </span>
-      </div>
-    </div>
-  </div>
 
   <!-- Main Navbar -->
   <nav :class="['navbar', { scrolled: isScrolled }]">
@@ -67,9 +46,7 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { onMounted, onUnmounted } from 'vue'
-import businessInfo from '../../data/businessInfo.js'
 
-const info = businessInfo
 const route = useRoute()
 const menuOpen = ref(false)
 const isScrolled = ref(false)
@@ -95,62 +72,6 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>
 
 <style scoped>
-/* Top Bar */
-.top-bar {
-  background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  color: #475569;
-  font-size: 12px;
-  padding: 6px 0;
-}
-.top-bar-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.top-bar-left {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.top-bar-right {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  font-size: 11.5px;
-  color: #64748b;
-}
-.top-bar-address {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.top-bar a {
-  color: #1e293b;
-  font-weight: 600;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.2s;
-}
-.top-bar a:hover { color: var(--primary); }
-.top-bar i { color: var(--primary); font-size: 11.5px; }
-.gst-badge {
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  color: #0f172a;
-  border-radius: 12px;
-  padding: 2px 10px;
-  font-size: 11px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
 
 /* Navbar */
 .navbar {
@@ -285,6 +206,5 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   .nav-links.open { display: flex; }
   .nav-links a { border-radius: 8px; }
   .navbar { position: relative; }
-  .top-bar-right { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
 </style>
