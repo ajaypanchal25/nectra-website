@@ -153,11 +153,24 @@
   <Teleport to="body">
     <Transition name="lightbox-fade">
       <div v-if="lightboxOpen" class="lightbox-backdrop" @click.self="closeLightbox">
-        <button class="lightbox-close" @click="closeLightbox"><i class="fas fa-times"></i></button>
-        <button class="lightbox-nav prev" @click="prevPhoto"><i class="fas fa-chevron-left"></i></button>
-        <button class="lightbox-nav next" @click="nextPhoto"><i class="fas fa-chevron-right"></i></button>
+        <button class="lightbox-close" @click="closeLightbox" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+
         <div class="lightbox-content">
-          <img :src="factoryPhotos[lightboxIdx].src" :alt="factoryPhotos[lightboxIdx].caption" class="lightbox-img" />
+          <div
+            class="lightbox-img-wrapper"
+            @touchstart="handleTouchStart"
+            @touchend="handleTouchEnd"
+          >
+            <img :src="factoryPhotos[lightboxIdx].src" :alt="factoryPhotos[lightboxIdx].caption" class="lightbox-img" />
+            <button class="lightbox-nav prev" @click="prevPhoto" aria-label="Previous photo">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav next" @click="nextPhoto" aria-label="Next photo">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
           <div class="lightbox-caption-box">
             <h3><i class="fas fa-camera"></i> {{ factoryPhotos[lightboxIdx].caption }}</h3>
             <p>NECTRA SERVICES – Fabrication Facility, Ahmedabad</p>
@@ -221,6 +234,29 @@ function prevPhoto() {
 }
 function nextPhoto() {
   lightboxIdx.value = (lightboxIdx.value + 1) % factoryPhotos.length
+}
+
+let touchStartX = 0
+let touchEndX = 0
+
+function handleTouchStart(e) {
+  if (e.touches && e.touches.length > 0) {
+    touchStartX = e.touches[0].clientX
+  }
+}
+
+function handleTouchEnd(e) {
+  if (e.changedTouches && e.changedTouches.length > 0) {
+    touchEndX = e.changedTouches[0].clientX
+    const diff = touchStartX - touchEndX
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextPhoto()
+      } else {
+        prevPhoto()
+      }
+    }
+  }
 }
 </script>
 
@@ -415,23 +451,23 @@ function nextPhoto() {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: rgba(15,23,42,0.92);
+  background: rgba(15, 23, 42, 0.94);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 16px;
 }
 .lightbox-close {
   position: absolute;
-  top: 24px;
-  right: 28px;
-  z-index: 10;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.30);
+  background: rgba(15, 23, 42, 0.70);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   color: #fff;
   font-size: 20px;
   cursor: pointer;
@@ -439,48 +475,73 @@ function nextPhoto() {
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
 }
 .lightbox-close:hover { background: #ef4444; border-color: #ef4444; transform: scale(1.1); }
+.lightbox-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 95vw;
+  max-height: 94vh;
+  width: fit-content;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.70);
+}
+.lightbox-img-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: #0f172a;
+  overflow: hidden;
+}
+.lightbox-img {
+  display: block;
+  width: auto;
+  max-width: 94vw;
+  height: auto;
+  max-height: 72vh;
+  object-fit: contain;
+}
 .lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10;
-  width: 48px;
-  height: 48px;
+  z-index: 15;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.30);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 255, 255, 0.40);
   color: #fff;
   font-size: 18px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
 }
-.lightbox-nav.prev { left: 24px; }
-.lightbox-nav.next { right: 24px; }
-.lightbox-nav:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-50%) scale(1.1); }
-.lightbox-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #1e293b;
-  border: 1px solid rgba(255,255,255,0.20);
-  border-radius: 16px;
-  overflow: hidden;
-  max-width: 95vw;
-  max-height: 94vh;
-  width: fit-content;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.70);
+.lightbox-nav.prev { left: 14px; }
+.lightbox-nav.next { right: 14px; }
+.lightbox-nav:hover, .lightbox-nav:active {
+  background: var(--primary);
+  border-color: #fff;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(26, 111, 196, 0.6);
 }
-.lightbox-img { display: block; width: auto; max-width: 94vw; height: auto; max-height: 74vh; object-fit: contain; }
-.lightbox-caption-box { background: #1e293b; color: #fff; text-align: center; padding: 18px 24px 22px; width: 100%; box-sizing: border-box; }
-.lightbox-caption-box h3 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.lightbox-caption-box { background: #1e293b; color: #fff; text-align: center; padding: 16px 20px 20px; width: 100%; box-sizing: border-box; }
+.lightbox-caption-box h3 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .lightbox-caption-box h3 i { color: #38bdf8; }
-.lightbox-caption-box p { color: #cbd5e1; font-size: 14px; line-height: 1.5; margin: 0 0 8px; }
-.photo-count { display: inline-block; background: rgba(56,189,248,0.15); color: #38bdf8; border-radius: 12px; padding: 3px 12px; font-size: 12px; font-weight: 700; }
+.lightbox-caption-box p { color: #cbd5e1; font-size: 13.5px; line-height: 1.4; margin: 0 0 8px; }
+.photo-count { display: inline-block; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-radius: 12px; padding: 3px 12px; font-size: 12px; font-weight: 700; }
 .lightbox-fade-enter-active, .lightbox-fade-leave-active { transition: opacity 0.3s; }
 .lightbox-fade-enter-from, .lightbox-fade-leave-to { opacity: 0; }
 
@@ -503,8 +564,6 @@ function nextPhoto() {
   .about-main-img { height: 300px; }
   .mv-grid { grid-template-columns: 1fr; }
   .factory-grid-row { grid-template-columns: 1fr; }
-  .lightbox-nav.prev { left: 10px; }
-  .lightbox-nav.next { right: 10px; }
   .factory-highlights { flex-wrap: wrap; }
   .fh-item { flex: 50%; border-bottom: 1px solid #e2e8f0; }
   .cta-inner { text-align: center; flex-direction: column; justify-content: center; }
@@ -512,6 +571,11 @@ function nextPhoto() {
 }
 @media (max-width: 768px) {
   .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .lightbox-backdrop { padding: 10px; }
+  .lightbox-close { top: 12px; right: 12px; width: 38px; height: 38px; font-size: 17px; }
+  .lightbox-nav { width: 42px; height: 42px; font-size: 16px; background: rgba(15, 23, 42, 0.82); }
+  .lightbox-nav.prev { left: 10px; }
+  .lightbox-nav.next { right: 10px; }
 }
 @media (max-width: 480px) {
   .why-grid { grid-template-columns: 1fr; }
