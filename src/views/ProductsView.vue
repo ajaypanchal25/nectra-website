@@ -36,74 +36,76 @@
     <Transition name="modal-fade">
       <div v-if="selectedProduct" class="modal-overlay" @click.self="closeModal">
         <div class="product-modal">
-          <button class="modal-close" @click="closeModal">
+          <button class="modal-close" @click="closeModal" aria-label="Close modal">
             <i class="fas fa-times"></i>
           </button>
 
-          <div class="modal-img-wrap">
-            <img :src="selectedProduct.image" :alt="selectedProduct.name" />
-          </div>
-
-          <div class="modal-body">
-            <span class="modal-badge">{{ selectedProduct.name }}</span>
-            <h2>{{ selectedProduct.name }}</h2>
-            <p class="modal-desc">{{ selectedProduct.fullDesc }}</p>
-
-            <div v-if="selectedProduct.motto" class="modal-motto-banner">
-              <i class="fas fa-star"></i> {{ selectedProduct.motto }}
+          <div class="product-modal-scroll">
+            <div class="modal-img-wrap">
+              <img :src="selectedProduct.image" :alt="selectedProduct.name" />
             </div>
 
-            <!-- Sub Products -->
-            <div v-if="selectedProduct.subProducts" class="modal-block">
-              <h4><i class="fas fa-list"></i> Products / Variants</h4>
-              <div class="tag-grid">
-                <span v-for="sp in selectedProduct.subProducts" :key="sp" class="tag-pill">
-                  <i class="fas fa-check"></i> {{ sp }}
-                </span>
+            <div class="modal-body">
+              <span class="modal-badge">{{ selectedProduct.name }}</span>
+              <h2>{{ selectedProduct.name }}</h2>
+              <p class="modal-desc">{{ selectedProduct.fullDesc }}</p>
+
+              <div v-if="selectedProduct.motto" class="modal-motto-banner">
+                <i class="fas fa-star"></i> {{ selectedProduct.motto }}
               </div>
-            </div>
 
-            <!-- Materials -->
-            <div v-if="selectedProduct.materials" class="modal-block">
-              <h4><i class="fas fa-layer-group"></i> Materials Used</h4>
-              <div class="materials-list">
-                <span v-for="m in selectedProduct.materials" :key="m" class="mat-badge">{{ m }}</span>
+              <!-- Sub Products -->
+              <div v-if="selectedProduct.subProducts" class="modal-block">
+                <h4><i class="fas fa-list"></i> Products / Variants</h4>
+                <div class="tag-grid">
+                  <span v-for="sp in selectedProduct.subProducts" :key="sp" class="tag-pill">
+                    <i class="fas fa-check"></i> {{ sp }}
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <!-- Features -->
-            <div v-if="selectedProduct.features" class="modal-block">
-              <h4><i class="fas fa-star"></i> Key Features</h4>
-              <ul class="modal-features-list">
-                <li v-for="f in selectedProduct.features" :key="f">
-                  <i class="fas fa-check-circle"></i> {{ f }}
-                </li>
-              </ul>
-            </div>
-
-            <!-- Applications -->
-            <div v-if="selectedProduct.applications" class="modal-block">
-              <h4><i class="fas fa-industry"></i> Applications</h4>
-              <div class="app-grid">
-                <span v-for="app in selectedProduct.applications" :key="app" class="app-chip">
-                  <i class="fas fa-check"></i> {{ app }}
-                </span>
+              <!-- Materials -->
+              <div v-if="selectedProduct.materials" class="modal-block">
+                <h4><i class="fas fa-layer-group"></i> Materials Used</h4>
+                <div class="materials-list">
+                  <span v-for="m in selectedProduct.materials" :key="m" class="mat-badge">{{ m }}</span>
+                </div>
               </div>
-            </div>
 
-            <!-- CTA Actions -->
-            <div class="modal-actions">
-              <a
-                :href="info.whatsappUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-whatsapp btn-lg"
-              >
-                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-              </a>
-              <a :href="info.phoneUrl" class="btn btn-primary btn-lg">
-                <i class="fas fa-phone-alt"></i> Call Now (+91 99791 70404)
-              </a>
+              <!-- Features -->
+              <div v-if="selectedProduct.features" class="modal-block">
+                <h4><i class="fas fa-star"></i> Key Features</h4>
+                <ul class="modal-features-list">
+                  <li v-for="f in selectedProduct.features" :key="f">
+                    <i class="fas fa-check-circle"></i> {{ f }}
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Applications -->
+              <div v-if="selectedProduct.applications" class="modal-block">
+                <h4><i class="fas fa-industry"></i> Applications</h4>
+                <div class="app-grid">
+                  <span v-for="app in selectedProduct.applications" :key="app" class="app-chip">
+                    <i class="fas fa-check"></i> {{ app }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- CTA Actions -->
+              <div class="modal-actions">
+                <a
+                  :href="info.whatsappUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-whatsapp btn-lg"
+                >
+                  <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                </a>
+                <a :href="info.phoneUrl" class="btn btn-primary btn-lg">
+                  <i class="fas fa-phone-alt"></i> Call Now (+91 99791 70404)
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -275,15 +277,34 @@ function closeModal() {
   width: 100%;
   max-width: 760px;
   max-height: 90vh;
-  overflow: hidden auto;
   position: relative;
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.30);
+  overflow: hidden;
+}
+.product-modal-scroll {
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.product-modal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.product-modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.product-modal-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.product-modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }
 .modal-close {
   position: absolute;
   top: 16px;
   right: 16px;
-  z-index: 10;
+  z-index: 20;
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -296,6 +317,7 @@ function closeModal() {
   justify-content: center;
   cursor: pointer;
   transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 .modal-close:hover { background: #ef4444; }
 .modal-img-wrap { width: 100%; height: 320px; padding: 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
@@ -412,10 +434,22 @@ function closeModal() {
 
 @media (max-width: 768px) {
   .products-grid { grid-template-columns: 1fr; }
+  .modal-overlay { padding: 12px; }
+  .modal-body { padding: 24px 18px; }
+  .modal-img-wrap { height: 240px; padding: 12px; }
   .modal-features-list { grid-template-columns: 1fr; }
   .modal-actions { flex-direction: column; }
   .cta-inner { text-align: center; flex-direction: column; justify-content: center; }
   .cta-text { text-align: center; flex-direction: column; }
   .cta-btns { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .modal-overlay { padding: 8px; }
+  .modal-close { top: 10px; right: 10px; width: 34px; height: 34px; font-size: 15px; }
+  .modal-img-wrap { height: 200px; }
+  .modal-body { padding: 18px 14px; }
+  .modal-body h2 { font-size: 22px; }
+  .modal-actions .btn { width: 100%; justify-content: center; }
 }
 </style>
