@@ -1,0 +1,8 @@
+# robots.txt for NECTRA SERVICES
+# https://www.nectraservices.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.nectraservices.com/sitemap.xml
